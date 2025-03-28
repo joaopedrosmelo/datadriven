@@ -1,0 +1,6 @@
+@DataDriven_HostAddress = http://localhost:5223
+
+GET {{DataDriven_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
