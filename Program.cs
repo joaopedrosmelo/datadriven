@@ -1,6 +1,8 @@
+using DataDrivenApi.BackgroundServices;
 using DataDrivenApi.Data;
 using DataDrivenApi.Middleware;
 using DataDrivenApi.Repositories;
+using DataDrivenApi.Services.TaskQueue;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +12,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllers();
+
+// Add BackgroundTaskQueue
+builder.Services.AddSingleton<IBackgroundTaskQueue, BackgroundTaskQueue>();
+builder.Services.AddHostedService<BackgroundTaskProcessor>();
 
 // Add MediatR
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
